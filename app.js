@@ -27,9 +27,24 @@ numberDivs.forEach((number) => {
   };
 });
 
+//^ clicking on any operations
+// when any op clicked (return true on that op)
+operationDivs.forEach((op) => {
+  op.onclick = () => {
+    //?currentDisplay boşken, hiçbir şekilde sayı girişi yapılmamışsa, operatöre basılmasın. boş return yapmaya çalıştığınız işlemi yaptırmaz.
+    //? return fonksiyon içerisinde her yerde kullanılabilir. Kod return satırına eriştiğinde fonksiyon durur ve değer fonksiyonun çağırıldığı yere geri gönderilir. Bir fonksiyon içerisinde birden fazla return fonksiyonu da olabilir. return değer döndürmek zorunda değildir. return den sonra else yerine if kullanmalıyız
+    // If the operation is pressed repeatedly without pressing equal (if the operation is continued while the upper and lower screens are full)
+
+    operation = op.textContent;
+    preDisplayText = currentDisplayText;
+    currentDisplayText = "";
+    updateDisplay();
+  };
+});
+
 //& Functions
 
-//! displayPrep Function
+//! display preparation
 const displayPrep = (num) => {
   //kullanıcı 0 girerse, sonrasında 0 ve . dışında bir sayı girerse, ekranda sadece girilen yeni sayı (0 iptal olsun) gözüksün
   //kullanıcı herhangi bir yerde . girmişken, tekrar nokta girmeye kalkarsa giremesin
@@ -54,24 +69,36 @@ const updateDisplay = () => {
   }
 };
 
-//^ clicking on any operations
-// when any op clicked (return true on that op)
-operationDivs.forEach((op) => {
-  op.onclick = () => {
-    //?currentDisplay boşken, hiçbir şekilde sayı girişi yapılmamışsa, operatöre basılmasın. boş return yapmaya çalıştığınız işlemi yaptırmaz.
-    //? return fonksiyon içerisinde her yerde kullanılabilir. Kod return satırına eriştiğinde fonksiyon durur ve değer fonksiyonun çağırıldığı yere geri gönderilir. Bir fonksiyon içerisinde birden fazla return fonksiyonu da olabilir. return değer döndürmek zorunda değildir. return den sonra else yerine if kullanmalıyız
-    // If the operation is pressed repeatedly without pressing equal (if the operation is continued while the upper and lower screens are full)
+//! clicking on equal operator
 
-    operation = op.textContent;
-    preDisplayText = currentDisplayText;
-    currentDisplayText = "";
-    updateDisplay();
-  };
-});
+equalDiv.onclick = () => {
+  calculate();
+  updateDisplay();
+};
 
-//^ clicking on equal operator
+//! calculate number according to operation
+const calculate = () => {
+  switch (operation) {
+    case "+":
+      result = +preDisplayText + Number(currentDisplayText);
+      break;
+    case "-":
+      result = preDisplayText - currentDisplayText;
+      break;
+    case "x":
+      result = preDisplayText * currentDisplayText;
+      break;
+    case "÷":
+      result = preDisplayText / currentDisplayText;
+      break;
+    default:
+      break;
+  }
 
-//! calculate function
+  currentDisplayText = result;
+  preDisplayText = "";
+  operation = "";
+};
 
 //^ clicking on AC operator
 
