@@ -22,21 +22,13 @@ Project aims to create a calculator app.
 |----ios.gif
 ```
 
-## Expected Outcome
+## Outcome
 
 ![Project  Snapshot](./ios.gif)
 
 ## Objective
 
 Create a Calculator that is functionally similar to the expected output
-
-### At the end of the project, following topics are to be covered;
-
-- HTML
-
-- CSS
-
-- JS
 
 ### At the end of the project, will be able to;
 
